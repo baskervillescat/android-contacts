@@ -1,12 +1,16 @@
 package ru.yandex.practicum.contacts.presentation.main;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.List;
 
 import ru.yandex.practicum.contacts.model.ContactType;
+import ru.yandex.practicum.contacts.presentation.base.ListDiffInterface;
 
-public class ContactUi {
+
+
+public class ContactUi extends DiffUtil.ItemCallback<ContactUi> implements ListDiffInterface <ContactUi> {
 
     private final String name;
     private final String phone;
@@ -61,5 +65,19 @@ public class ContactUi {
         result = 31 * result + photo.hashCode();
         result = 31 * result + types.hashCode();
         return result;
+    }
+    @Override
+    public boolean theSameAs(ContactUi newItem) {
+        return this.hashCode() == newItem.hashCode();
+    }
+
+    @Override
+    public boolean areItemsTheSame(@NonNull ContactUi oldItem, @NonNull ContactUi newItem) {
+        return theSameAs(newItem);
+    }
+
+    @Override
+    public boolean areContentsTheSame(@NonNull ContactUi oldItem, @NonNull ContactUi newItem) {
+        return equals(newItem);
     }
 }

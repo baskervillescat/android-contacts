@@ -1,11 +1,15 @@
 package ru.yandex.practicum.contacts.presentation.filter.model;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 
-public class FilterContactTypeUi {
+import ru.yandex.practicum.contacts.presentation.base.ListDiffInterface;
+
+public class FilterContactTypeUi extends DiffUtil.ItemCallback<FilterContactTypeUi> implements ListDiffInterface <FilterContactTypeUi> {
 
     private final FilterContactType contactType;
     private final boolean selected;
+    private FilterContactTypeUi newItem;
 
     public FilterContactTypeUi(@NonNull FilterContactType contactType, boolean selected) {
         this.contactType = contactType;
@@ -36,5 +40,20 @@ public class FilterContactTypeUi {
         int result = contactType.hashCode();
         result = 31 * result + (selected ? 1 : 0);
         return result;
+    }
+
+    @Override
+    public boolean theSameAs(FilterContactTypeUi newItem) {
+          return this.getContactType() == newItem.getContactType();
+    }
+
+    @Override
+    public boolean areItemsTheSame(@NonNull FilterContactTypeUi oldItem, @NonNull FilterContactTypeUi newItem) {
+        return theSameAs(newItem);
+    }
+
+    @Override
+    public boolean areContentsTheSame(@NonNull FilterContactTypeUi oldItem, @NonNull FilterContactTypeUi newItem) {
+        return equals(newItem);
     }
 }
