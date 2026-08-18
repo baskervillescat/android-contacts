@@ -1,5 +1,7 @@
 package ru.yandex.practicum.contacts.presentation.base;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DiffUtil;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -63,3 +66,4 @@ public abstract class BaseBottomSheetDialogFragment<T extends BaseBottomSheetVie
         super.onDestroy();
     }
 }
+
